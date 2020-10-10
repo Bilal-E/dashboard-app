@@ -57,10 +57,8 @@ class Dashboard extends Component {
     }
 
     getData = arg => {
-        
+
         const arr = this.state.items;
-        
-        let selectedValue = null;
 
         let organicSource = 0;
         let directSource = 0;
@@ -82,9 +80,9 @@ class Dashboard extends Component {
         let doughnut2Arr = [];
         let columnArr = [];
 
-        for(let i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
 
-            if(arg == arr[i]["month"]) {
+            if (arg === arr[i]["month"]) {
 
                 organicSource = arr[i].organic_source;
                 directSource = arr[i].direct_source;
@@ -142,13 +140,6 @@ class Dashboard extends Component {
                     }
                 );
 
-                // lineArr.push(
-                //     {
-                //         label: arr[i].avg_session_time,
-                //         value: arr[i].page_per_session
-                //     }
-                // );
-
                 doughnutArr.push(
                     {
                         label: "Pages per Session",
@@ -181,22 +172,20 @@ class Dashboard extends Component {
                         value: arr[i].new_users
                     }
                 );
-            
+
             }
         }
 
-        selectedValue = arg;
-        
         this.setState({
             organicSource: organicSource,
             directSource: directSource,
-            referralSource: referralSource, 
-            socialSource: socialSource, 
-            emailSource: emailSource, 
-            pageViews: pageViews, 
-            users: users, 
-            newUsers: newUsers, 
-            sessions: sessions, 
+            referralSource: referralSource,
+            socialSource: socialSource,
+            emailSource: emailSource,
+            pageViews: pageViews,
+            users: users,
+            newUsers: newUsers,
+            sessions: sessions,
             sessionsPerUsers: sessionsPerUsers,
             pagePerSession: pagePerSession,
             avgSessionTime: avgSessionTime,
@@ -205,10 +194,9 @@ class Dashboard extends Component {
             pieArr: pieArr,
             doughnutArr: doughnutArr,
             doughnut2Arr: doughnut2Arr,
-            columnArr: columnArr
+            columnArr: columnArr,
 
-
-        }, 
+        },
             () => {
                 console.log(this.state.organicSource);
                 console.log(this.state.doughnutArr);
@@ -224,12 +212,12 @@ class Dashboard extends Component {
         },
             () => {
                 console.log(this.state.organicSource);
-            }    
+            }
         );
     }
 
     componentDidMount() {
-        
+
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -245,14 +233,14 @@ class Dashboard extends Component {
                     }
                     rows.push(rowObject);
                 }
-                
+
                 // dropdown options
                 let dropDownOptions = [];
 
                 for (let i = 0; i < rows.length; i++) {
                     dropDownOptions.push(rows[i].month);
                 }
-                
+
                 dropDownOptions = Array.from(new Set(dropDownOptions)).reverse();
                 this.setState(
                     {
@@ -262,7 +250,7 @@ class Dashboard extends Component {
                     },
                     () => this.getData("Jan 2018")
                 );
-            
+
             });
     }
 
@@ -271,142 +259,145 @@ class Dashboard extends Component {
 
         return (
 
-         <div>
+            <div>
 
-            <Container fluid>
+                <Container fluid>
 
-                <Row id = 'headRow'>
-                
-                    <Col id = 'heading'>
-                        Website Traffic Dashboard
-                    </Col>
-                
-                    <Col>
-                        <Dropdown 
-                            options={this.state.dropDownOptions}
-                            onChange={this.updateDashboard}
-                            value={this.state.selectedValue}
-                            placeholder="Select an option" />;
-                    </Col>
-                
-                </Row>
+                    <Row id='headRow'>
 
-            </Container>
-
-            <Container>
-
-                <Row>
-
-                    <Col>
-                        <WidgetText title='Organic Source' value = {this.state.organicSource} />
+                        <Col id='heading'>
+                            Website Traffic Dashboard
                     </Col>
 
-                    <Col>
-                        <WidgetText title='Direct Source' value = {this.state.directSource} />
-                    </Col>
-
-                    <Col>
-                        <WidgetText title='Referral Source' value = {this.state.referralSource} />
-                    </Col>
-
-                    <Col>
-                        <WidgetText title='Social Source' value = {this.state.socialSource} />
-                    </Col>
-
-                    <Col>
-                        <WidgetText title='Email Source' value = {this.state.emailSource} />                    
-                    </Col>
-
-                    <Col>
-                        <WidgetText title='Page Views' value = {this.state.pageViews} />
-                    </Col>
-
-                </Row>
-
-                <Row>
-                    
-                    <Card
-                        text='white'
-                        bg='dark'
-                        style={{
-                            width: '100%',
-                            borderRadius: '3%',
-                            margin: '5%' }}>
-                        
                         <Col>
-                            <WidgetBar data = {this.state.barArr} />
+                            <Dropdown
+                                options={this.state.dropDownOptions}
+                                onChange={this.updateDashboard}
+                                value={this.state.selectedValue}
+                                placeholder="Select an option" />;
+                    </Col>
+
+                    </Row>
+
+                </Container>
+
+                <Container>
+
+                    <Row>
+
+                        <Col>
+                            <WidgetText title='Organic Source' value={this.state.organicSource} />
                         </Col>
 
-                    </Card>
-
-                </Row>
-
-                <Row id = 'row4'> 
-                    
-                    <Card
-                        text='white'
-                        bg='dark'
-                        style={{
-                            width: '28rem',
-                            borderRadius: '3%',
-                            margin: '5%' }}>
                         <Col>
-                            <WidgetPie data={this.state.pieArr} />
-                        </Col>
-                    
-                    </Card>
-                    
-                    <Card
-                        text='white'
-                        bg='dark'
-                        style={{
-                            width: '28rem',
-                            borderRadius: '3%',
-                            margin: '5%'
-                        }}>
-                        <Col>
-                            <WidgetColumn data={this.state.columnArr} />
+                            <WidgetText title='Direct Source' value={this.state.directSource} />
                         </Col>
 
-                    </Card>
-
-                </Row>
-
-                <Row id='row5'>
-                    <Card
-                        text='white'
-                        bg='dark'
-                        style={{
-                            width: '28rem',
-                            borderRadius: '3%',
-                            margin: '5%' }}>
                         <Col>
-                            <WidgetDoughnut data ={this.state.doughnutArr} />
+                            <WidgetText title='Referral Source' value={this.state.referralSource} />
                         </Col>
-                    </Card>
 
-                    <Card
-                        text='white'
-                        bg='dark'
-                        style={{
-                            width: '28rem',
-                            borderRadius: '3%',
-                            margin: '5%'
-                        }}>
-                    
                         <Col>
-                            <WidgetDoughnut data={this.state.doughnut2Arr} />
+                            <WidgetText title='Social Source' value={this.state.socialSource} />
                         </Col>
-                    
-                    </Card>
 
-                </Row>
+                        <Col>
+                            <WidgetText title='Email Source' value={this.state.emailSource} />
+                        </Col>
 
-            </Container>
+                        <Col>
+                            <WidgetText title='Page Views' value={this.state.pageViews} />
+                        </Col>
 
-         </div>
-       
-       );
+                    </Row>
+
+                    <Row>
+
+                        <Card
+                            text='white'
+                            bg='dark'
+                            style={{
+                                width: '100%',
+                                borderRadius: '3%',
+                                margin: '5%'
+                            }}>
+
+                            <Col>
+                                <WidgetBar data={this.state.barArr} />
+                            </Col>
+
+                        </Card>
+
+                    </Row>
+
+                    <Row id='row4'>
+
+                        <Card
+                            text='white'
+                            bg='dark'
+                            style={{
+                                width: '28rem',
+                                borderRadius: '3%',
+                                margin: '5%'
+                            }}>
+                            <Col>
+                                <WidgetPie data={this.state.pieArr} />
+                            </Col>
+
+                        </Card>
+
+                        <Card
+                            text='white'
+                            bg='dark'
+                            style={{
+                                width: '28rem',
+                                borderRadius: '3%',
+                                margin: '5%'
+                            }}>
+                            <Col>
+                                <WidgetColumn data={this.state.columnArr} />
+                            </Col>
+
+                        </Card>
+
+                    </Row>
+
+                    <Row id='row5'>
+                        <Card
+                            text='white'
+                            bg='dark'
+                            style={{
+                                width: '28rem',
+                                borderRadius: '3%',
+                                margin: '5%'
+                            }}>
+                            <Col>
+                                <WidgetDoughnut data={this.state.doughnutArr} />
+                            </Col>
+                        </Card>
+
+                        <Card
+                            text='white'
+                            bg='dark'
+                            style={{
+                                width: '28rem',
+                                borderRadius: '3%',
+                                margin: '5%'
+                            }}>
+
+                            <Col>
+                                <WidgetDoughnut data={this.state.doughnut2Arr} />
+                            </Col>
+
+                        </Card>
+
+                    </Row>
+
+                </Container>
+
+            </div>
+
+        );
     }
 }
 
