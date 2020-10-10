@@ -38,4 +38,4 @@ jobs:
         run: npm install -g surge
 
       - name: Deploying Surge
-        run: surge ./build http://exptrackbybilal.surge.sh// --token ${{secrets.SURGE_TOKEN_DASHBOARD}}
+        run: surge ./build http://dashboardbybilal.surge.sh// --token ${{secrets.SURGE_TOKEN_DASHBOARD}}
