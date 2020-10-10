@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap");
+
+html {
+  background-color: black;
+}
+
+.dashboardDiv {
+  background-color: black;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.card-header {
+  font-size: 22px;
+}
+
+.card-title.h5 {
+  font-size: 45px;
+}
+
+#textDiv {
+  margin-right: 20px;
+}
+
+text {
+  fill: whitesmoke;
+}
+
+#heading {
+  text-align: left;
+  font-size: 25px;
+  color: white;
+}
+
+#headRow {
+  background-color: chocolate;
+}
+
+.card-title.h5 {
+  color: sandybrown;
+}
+
+.Dropdown-control {
+  float: right;
+}
+
+#row4,
+#row5 {
+  display: flex;
+  justify-content: center;
+}
+
+
